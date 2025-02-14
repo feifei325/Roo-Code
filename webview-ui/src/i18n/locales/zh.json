@@ -37,6 +37,7 @@
 	"announcement": {
 		"title": "🎉  欢迎使用 Roo Code 3.2"
 	},
+	"instructionsText": "说明也可以从您的工作空间中的 <link /> 加载。",
 	"settings": {
 		"title": "设置",
 		"done": "完成",
@@ -249,21 +250,17 @@
 		}
 	},
 	"promptsView": {
+		"promptCustomInstructions": "特定于 {{modeName}} 模式的自定义说明也可以从 <span>{{fileName}}</span> 在您的工作区加载。",
 		"preferredLanguage": "首选语言",
 		"customInstructions": "所有模式的自定义指令",
 		"modeSpecificPrompts": "模式特定提示",
 		"createNewMode": "创建新模式",
-		"openFileInstructionsBefore": "说明也可以从",
-		"openFileInstructionsAfter": "在您的工作区中加载。",
 		"createModeDescription": "点击 + 创建一个新的自定义模式，或者直接在聊天中告诉 Roo 为您创建一个！",
 		"roleDefinitionDescription": "定义 Roo 在此模式下的专长和个性。这个描述决定了 Roo 如何展现自己并处理任务。",
 		"preferredLanguageDescription": "选择 Cline 用于沟通的语言。",
 		"customInstructionsDescription": "这些说明适用于所有模式。它们提供了一组基本行为，可以通过以下特定于模式的说明进行增强。",
 		"apiConfigurationDescription": "选择此模式要使用的 API 配置",
 		"toolsDescription": "内置模式的工具无法修改",
-		"codeCustomInstructionsBefore": "特定于",
-		"codeCustomInstructionsMiddle": "模式的自定义说明也可以从",
-		"codeCustomInstructionsAfter": "在您的工作区中加载。",
 		"editModesConfiguration": "编辑模式配置",
 		"deleteMode": "删除模式",
 		"roleDefinition": "角色定义",
@@ -275,8 +272,7 @@
 		"copySystemPrompt": "复制系统提示到剪贴板",
 		"supportPrompts": "支持提示",
 		"prompt": "提示",
-		"resetPromptBefore": "重置",
-		"resetPromptAfter": "提示为默认值",
+		"resetPromptTitle": "将 {{activeSupportTab}} 提示重置为默认",
 		"enhancePrompt": "预览提示词增强",
 		"enhancementApiConfig": "增强提示的 API 配置",
 		"enhancementCurrentlyApiConfig": "使用当前选定的 API 配置",
@@ -301,7 +297,15 @@
 			},
 			"roleDefinition": {
 				"title": "角色定义",
-				"description": "定义 Roo 在此模式下的专长和个性。"
+				"description": "定义 Roo 在此模式下的专长和个性。",
+				"global": {
+					"title": "全局",
+					"description": "在所有工作区中可用"
+				},
+				"specific": {
+					"title": "项目特定（.roomodes）",
+					"description": "仅在此工作区中可用，优先于全局设置"
+				}
 			},
 			"tools": {
 				"title": "可用工具",

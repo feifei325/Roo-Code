@@ -265,21 +265,19 @@
 			"description": "Use MCP"
 		}
 	},
+	"instructionsText": "Instructions can also be loaded from <link /> in your workspace.",
 	"promptsView": {
+		"promptCustomInstructions": "Custom instructions specific to {{modeName}} mode can also be loaded from <span>{{fileName}}</span> in your workspace.",
 		"preferredLanguage": "Preferred Language",
 		"customInstructions": "Custom Instructions for All Modes",
 		"modeSpecificPrompts": "Mode-Specific Prompts",
 		"createNewMode": "Create new mode",
-		"openFileInstructionsBefore": "Instructions can also be loaded from",
-		"openFileInstructionsAfter": "in your workspace.",
 		"createModeDescription": "Hit the + to create a new custom mode, or just ask Roo in chat to create one for you!",
 		"roleDefinitionDescription": "Define Roo's expertise and personality for this mode. This description shapes how Roo presents itself and approaches tasks.",
 		"preferredLanguageDescription": "Select the language that Cline should use for communication.",
 		"customInstructionsDescription": "These instructions apply to all modes. They provide a base set of behaviors that can be enhanced by mode-specific instructions below.",
 		"apiConfigurationDescription": "Select which API configuration to use for this mode",
 		"toolsDescription": "Tools for built-in modes cannot be modified",
-		"codeCustomInstructionsBefore": "Custom instructions specific to",
-		"codeCustomInstructionsMiddle": "mode can also be loaded from",
 		"codeCustomInstructionsAfter": "in your workspace.",
 		"editModesConfiguration": "Edit modes configuration",
 		"deleteMode": "Delete mode",
@@ -292,8 +290,7 @@
 		"copySystemPrompt": "Copy system prompt to clipboard",
 		"supportPrompts": "Support Prompts",
 		"prompt": "Prompt",
-		"resetPromptBefore": "Reset",
-		"resetPromptAfter": "prompt to default",
+		"resetPromptTitle": "Reset {{activeSupportTab}} prompt to default",
 		"enhancePrompt": "Preview Prompt Enhancement",
 		"enhancementApiConfig": "API Configuration for Enhancement",
 		"enhancementCurrentlyApiConfig": "Use currently selected API configuration",
@@ -318,7 +315,15 @@
 			},
 			"roleDefinition": {
 				"title": "Role Definition",
-				"description": "Define Roo's expertise and personality for this mode."
+				"description": "Define Roo's expertise and personality for this mode.",
+				"global": {
+					"title": "Global",
+					"description": "Available in all workspaces"
+				},
+				"specific": {
+					"title": "Project-specific (.roomodes)",
+					"description": "Only available in this workspace, takes precedence over global"
+				}
 			},
 			"tools": {
 				"title": "Available Tools",
