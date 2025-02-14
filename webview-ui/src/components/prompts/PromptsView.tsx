@@ -19,6 +19,7 @@ import {
 	ModeConfig,
 	GroupEntry,
 } from "../../../../src/shared/modes"
+import { CustomModeSchema } from "../../../../src/core/config/CustomModesSchema"
 import {
 	supportPrompt,
 	SupportPromptType,
@@ -159,15 +160,34 @@ const PromptsView = ({ onDone }: PromptsViewProps) => {
 	const [newModeGroups, setNewModeGroups] = useState<GroupEntry[]>(availableGroups)
 	const [newModeSource, setNewModeSource] = useState<ModeSource>("global")
 
+	// Field-specific error states
+	const [nameError, setNameError] = useState<string>("")
+	const [slugError, setSlugError] = useState<string>("")
+	const [roleDefinitionError, setRoleDefinitionError] = useState<string>("")
+	const [groupsError, setGroupsError] = useState<string>("")
+
+	// Helper to reset form state
+	const resetFormState = useCallback(() => {
+		// Reset form fields
+		setNewModeName("")
+		setNewModeSlug("")
+		setNewModeGroups(availableGroups)
+		setNewModeRoleDefinition("")
+		setNewModeCustomInstructions("")
+		setNewModeSource("global")
+		// Reset error states
+		setNameError("")
+		setSlugError("")
+		setRoleDefinitionError("")
+		setGroupsError("")
+	}, [])
+
 	// Reset form fields when dialog opens
 	useEffect(() => {
 		if (isCreateModeDialogOpen) {
-			setNewModeGroups(availableGroups)
-			setNewModeRoleDefinition("")
-			setNewModeCustomInstructions("")
-			setNewModeSource("global")
+			resetFormState()
 		}
-	}, [isCreateModeDialogOpen])
+	}, [isCreateModeDialogOpen, resetFormState])
 
 	// Helper function to generate a unique slug from a name
 	const generateSlug = useCallback((name: string, attempt = 0): string => {
@@ -188,26 +208,52 @@ const PromptsView = ({ onDone }: PromptsViewProps) => {
 	)
 
 	const handleCreateMode = useCallback(() => {
-		if (!newModeName.trim() || !newModeSlug.trim()) return
+		// Clear previous errors
+		setNameError("")
+		setSlugError("")
+		setRoleDefinitionError("")
+		setGroupsError("")
 
 		const source = newModeSource
 		const newMode: ModeConfig = {
 			slug: newModeSlug,
 			name: newModeName,
-			roleDefinition: newModeRoleDefinition.trim() || "",
+			roleDefinition: newModeRoleDefinition.trim(),
 			customInstructions: newModeCustomInstructions.trim() || undefined,
 			groups: newModeGroups,
 			source,
 		}
+
+		// Validate the mode against the schema
+		const result = CustomModeSchema.safeParse(newMode)
+		if (!result.success) {
+			// Map Zod errors to specific fields
+			result.error.errors.forEach((error) => {
+				const field = error.path[0] as string
+				const message = error.message
+
+				switch (field) {
+					case "name":
+						setNameError(message)
+						break
+					case "slug":
+						setSlugError(message)
+						break
+					case "roleDefinition":
+						setRoleDefinitionError(message)
+						break
+					case "groups":
+						setGroupsError(message)
+						break
+				}
+			})
+			return
+		}
+
 		updateCustomMode(newModeSlug, newMode)
 		switchMode(newModeSlug)
 		setIsCreateModeDialogOpen(false)
-		setNewModeName("")
-		setNewModeSlug("")
-		setNewModeRoleDefinition("")
-		setNewModeCustomInstructions("")
-		setNewModeGroups(availableGroups)
-		setNewModeSource("global")
+		resetFormState()
 		// eslint-disable-next-line react-hooks/exhaustive-deps
 	}, [
 		newModeName,
@@ -652,9 +698,7 @@ const PromptsView = ({ onDone }: PromptsViewProps) => {
 										appearance="icon"
 										onClick={() => setIsToolsEditMode(!isToolsEditMode)}
 										title={
-											isToolsEditMode
-												? t("promptsView.cancel")
-												: t("promptsView.editModesConfiguration")
+											isToolsEditMode ? t("promptsView.doneEditing") : t("promptsView.editTools")
 										}>
 										<span
 											className={`codicon codicon-${isToolsEditMode ? "check" : "edit"}`}></span>
@@ -1088,6 +1132,9 @@ const PromptsView = ({ onDone }: PromptsViewProps) => {
 									}}
 									style={{ width: "100%" }}
 								/>
+								{nameError && (
+									<div className="text-xs text-vscode-errorForeground mt-1">{nameError}</div>
+								)}
 							</div>
 							<div style={{ marginBottom: "16px" }}>
 								<div style={{ fontWeight: "bold", marginBottom: "4px" }}>
@@ -1111,6 +1158,9 @@ const PromptsView = ({ onDone }: PromptsViewProps) => {
 									}}>
 									{t("promptsView.createModeDialog.slug.description")}
 								</div>
+								{slugError && (
+									<div className="text-xs text-vscode-errorForeground mt-1">{slugError}</div>
+								)}
 							</div>
 							<div style={{ marginBottom: "16px" }}>
 								<div style={{ fontWeight: "bold", marginBottom: "4px" }}>
@@ -1170,6 +1220,11 @@ const PromptsView = ({ onDone }: PromptsViewProps) => {
 									resize="vertical"
 									style={{ width: "100%" }}
 								/>
+								{roleDefinitionError && (
+									<div className="text-xs text-vscode-errorForeground mt-1">
+										{roleDefinitionError}
+									</div>
+								)}
 							</div>
 							<div style={{ marginBottom: "16px" }}>
 								<div style={{ fontWeight: "bold", marginBottom: "4px" }}>
@@ -1209,6 +1264,9 @@ const PromptsView = ({ onDone }: PromptsViewProps) => {
 										</VSCodeCheckbox>
 									))}
 								</div>
+								{groupsError && (
+									<div className="text-xs text-vscode-errorForeground mt-1">{groupsError}</div>
+								)}
 							</div>
 							<div style={{ marginBottom: "16px" }}>
 								<div style={{ fontWeight: "bold", marginBottom: "4px" }}>
