@@ -34,7 +34,8 @@ const supportPromptConfigs: Record<string, SupportPromptConfig> = {
 	ENHANCE: {
 		label: "supportPrompt.ENHANCE.label",
 		description: "supportPrompt.ENHANCE.description",
-		template: `Generate an enhanced version of this prompt (reply with only the enhanced prompt - no conversation, explanations, lead-in, bullet points, or surrounding quotes):
+		template: `Generate an enhanced version of this prompt (reply with only the enhanced prompt - no conversation, explanations, lead-in, bullet points, placeholders, or surrounding quotes):
+
 \${userInput}`,
 	},
 	EXPLAIN: {
@@ -84,6 +85,7 @@ Please suggest improvements for:
 2. Performance optimization
 3. Best practices and patterns
 4. Error handling and edge cases
+
 Provide the improved code along with explanations for each enhancement.`,
 	},
 	ADD_TO_CONTEXT: {
@@ -95,8 +97,9 @@ Provide the improved code along with explanations for each enhancement.`,
 \`\`\``,
 	},
 	TERMINAL_ADD_TO_CONTEXT: {
-		label: "supportPrompt.TERMINAL_ADD_TO_CONTEXT.label",
-		description: "supportPrompt.TERMINAL_ADD_TO_CONTEXT.description",
+		label: "Add Terminal Content to Context",
+		description:
+			"Add terminal output to your current task or conversation. Useful for providing command outputs or logs. Available in the terminal context menu (right-click on selected terminal content).",
 		template: `\${userInput}
 Terminal output:
 \`\`\`
@@ -111,6 +114,7 @@ Fix this terminal command:
 \`\`\`
 \${terminalContent}
 \`\`\`
+
 Please:
 1. Identify any issues in the command
 2. Provide the corrected command

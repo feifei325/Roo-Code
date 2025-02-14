@@ -211,6 +211,10 @@ const SettingsView = ({ onDone }: SettingsViewProps) => {
 								onChange={(value: unknown) => {
 									const lang = (value as DropdownOption).value
 									i18n.changeLanguage(lang)
+									vscode.postMessage({
+										type: "preferredLanguage",
+										text: lang,
+									})
 								}}
 								style={{ width: "100%" }}
 								options={[
