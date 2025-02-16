@@ -5,24 +5,6 @@ import { vscode } from "../../utils/vscode"
 import { memo } from "react"
 import { formatLargeNumber } from "../../utils/format"
 import { useCopyToClipboard } from "../../utils/clipboard"
-import en from "../../i18n/locales/en.json"
-
-// Mock react-i18next
-jest.mock("react-i18next", () => ({
-	useTranslation: () => ({
-		t: (key: string) => {
-			// 通过点号分割 key 来支持嵌套的翻译
-			const keys = key.split(".")
-			let value: any = en
-			for (const k of keys) {
-				value = value?.[k]
-			}
-			return value || key // 如果找不到翻译,返回 key 本身
-		},
-		i18n: { changeLanguage: jest.fn() },
-	}),
-	Trans: ({ children }: { children: React.ReactNode }) => <span>{children}</span>, // Mock Trans 组件
-}))
 
 type HistoryPreviewProps = {
 	showHistoryView: () => void
