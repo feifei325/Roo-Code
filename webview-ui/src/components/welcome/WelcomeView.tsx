@@ -7,24 +7,22 @@ import ApiOptions from "../settings/ApiOptions"
 import { Trans } from "react-i18next"
 
 const WelcomeView = () => {
-	const { apiConfiguration } = useExtensionState()
+	const { apiConfiguration, currentApiConfigName } = useExtensionState()
 
 	const [errorMessage, setErrorMessage] = useState<string | undefined>(undefined)
 
-	const handleSubmit = async () => {
-		// Focus the active element's parent to trigger blur
-		document.activeElement?.parentElement?.focus()
-
-		// Small delay to let blur events complete
-		await new Promise((resolve) => setTimeout(resolve, 50))
-
+	const handleSubmit = () => {
 		const error = validateApiConfiguration(apiConfiguration)
 		if (error) {
 			setErrorMessage(error)
 			return
 		}
 		setErrorMessage(undefined)
-		vscode.postMessage({ type: "apiConfiguration", apiConfiguration })
+		vscode.postMessage({
+			type: "upsertApiConfiguration",
+			text: currentApiConfigName,
+			apiConfiguration,
+		})
 	}
 
 	return (

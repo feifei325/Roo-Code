@@ -3,7 +3,7 @@ import { memo, useEffect, useRef, useState } from "react"
 import { ApiConfigMeta } from "../../../../src/shared/ExtensionMessage"
 import { Dropdown } from "vscrui"
 import type { DropdownOption } from "vscrui"
-import { Dialog, DialogContent } from "../ui/dialog"
+import { Dialog, DialogContent, DialogTitle } from "../ui/dialog"
 import { useTranslation } from "react-i18next"
 
 interface ApiConfigManagerProps {
@@ -304,9 +304,7 @@ const ApiConfigManager = ({
 					}}
 					aria-labelledby="new-profile-title">
 					<DialogContent className="p-4 max-w-sm">
-						<h2 id="new-profile-title" className="text-lg font-semibold mb-4">
-							{t("settings.apiConfigManager.newProfile")}
-						</h2>
+						<DialogTitle>{t("settings.apiConfigManager.newProfile")}</DialogTitle>
 						<button
 							className="absolute right-4 top-4"
 							aria-label={t("settings.apiConfigManager.closeDialog")}
