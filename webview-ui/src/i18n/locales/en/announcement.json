@@ -1,0 +1,18 @@
+{
+	"hideAnnouncement": "Hide announcement",
+	"rooCodeReleased": "🎉 Roo Code 3.8 Released",
+	"rooCodeDescription": "Roo Code 3.8 is out with performance boosts, new features, and bug fixes.",
+	"whatsNew": "What's New",
+	"fasterCheckpoints": "• Faster asynchronous checkpoints",
+	"rooignoreSupport": "• Support for .rooignore files",
+	"fixedIssues": "• Fixed terminal & gray screen issues",
+	"multiWindow": "• Roo Code can run in multiple windows",
+	"multiDiff": "• Experimental multi-diff editing strategy",
+	"subtaskCommunication": "• Subtask to parent task communication",
+	"updatedDeepSeek": "• Updated DeepSeek provider",
+	"newHumanRelay": "• New \"Human Relay\" provider",
+	"getMoreDetails": "Get more details and discuss in",
+	"discord": "Discord",
+	"reddit": "Reddit",
+	"rocket": "🚀"
+}

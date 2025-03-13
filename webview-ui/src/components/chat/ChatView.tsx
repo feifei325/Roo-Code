@@ -119,16 +119,16 @@ const ChatView = ({ isHidden, showAnnouncement, hideAnnouncement, showHistoryVie
 							setTextAreaDisabled(true)
 							setClineAsk("api_req_failed")
 							setEnableButtons(true)
-							setPrimaryButtonText("Retry")
-							setSecondaryButtonText("Start New Task")
+							setPrimaryButtonText(t("chat:retry"))
+							setSecondaryButtonText(t("chat:startNewTask"))
 							break
 						case "mistake_limit_reached":
 							playSound("progress_loop")
 							setTextAreaDisabled(false)
 							setClineAsk("mistake_limit_reached")
 							setEnableButtons(true)
-							setPrimaryButtonText("Proceed Anyways")
-							setSecondaryButtonText("Start New Task")
+							setPrimaryButtonText(t("chat:proceedAnyways"))
+							setSecondaryButtonText(t("chat:startNewTask"))
 							break
 						case "followup":
 							setTextAreaDisabled(isPartial)
@@ -149,16 +149,16 @@ const ChatView = ({ isHidden, showAnnouncement, hideAnnouncement, showHistoryVie
 								case "editedExistingFile":
 								case "appliedDiff":
 								case "newFileCreated":
-									setPrimaryButtonText("Save")
-									setSecondaryButtonText("Reject")
+									setPrimaryButtonText(t("chat:save"))
+									setSecondaryButtonText(t("chat:reject"))
 									break
 								case "finishTask":
-									setPrimaryButtonText("Complete Subtask and Return")
+									setPrimaryButtonText(t("chat:completeSubtaskAndReturn"))
 									setSecondaryButtonText(undefined)
 									break
 								default:
-									setPrimaryButtonText("Approve")
-									setSecondaryButtonText("Reject")
+									setPrimaryButtonText(t("chat:approve"))
+									setSecondaryButtonText(t("chat:reject"))
 									break
 							}
 							break
@@ -169,8 +169,8 @@ const ChatView = ({ isHidden, showAnnouncement, hideAnnouncement, showHistoryVie
 							setTextAreaDisabled(isPartial)
 							setClineAsk("browser_action_launch")
 							setEnableButtons(!isPartial)
-							setPrimaryButtonText("Approve")
-							setSecondaryButtonText("Reject")
+							setPrimaryButtonText(t("chat:approve"))
+							setSecondaryButtonText(t("chat:reject"))
 							break
 						case "command":
 							if (!isAutoApproved(lastMessage)) {
@@ -179,22 +179,22 @@ const ChatView = ({ isHidden, showAnnouncement, hideAnnouncement, showHistoryVie
 							setTextAreaDisabled(isPartial)
 							setClineAsk("command")
 							setEnableButtons(!isPartial)
-							setPrimaryButtonText("Run Command")
-							setSecondaryButtonText("Reject")
+							setPrimaryButtonText(t("chat:runCommand"))
+							setSecondaryButtonText(t("chat:reject"))
 							break
 						case "command_output":
 							setTextAreaDisabled(false)
 							setClineAsk("command_output")
 							setEnableButtons(true)
-							setPrimaryButtonText("Proceed While Running")
+							setPrimaryButtonText(t("chat:proceedWhileRunning"))
 							setSecondaryButtonText(undefined)
 							break
 						case "use_mcp_server":
 							setTextAreaDisabled(isPartial)
 							setClineAsk("use_mcp_server")
 							setEnableButtons(!isPartial)
-							setPrimaryButtonText("Approve")
-							setSecondaryButtonText("Reject")
+							setPrimaryButtonText(t("chat:approve"))
+							setSecondaryButtonText(t("chat:reject"))
 							break
 						case "completion_result":
 							// extension waiting for feedback. but we can just present a new task button
@@ -202,22 +202,22 @@ const ChatView = ({ isHidden, showAnnouncement, hideAnnouncement, showHistoryVie
 							setTextAreaDisabled(isPartial)
 							setClineAsk("completion_result")
 							setEnableButtons(!isPartial)
-							setPrimaryButtonText("Start New Task")
+							setPrimaryButtonText(t("chat:startNewTask"))
 							setSecondaryButtonText(undefined)
 							break
 						case "resume_task":
 							setTextAreaDisabled(false)
 							setClineAsk("resume_task")
 							setEnableButtons(true)
-							setPrimaryButtonText("Resume Task")
-							setSecondaryButtonText("Terminate")
+							setPrimaryButtonText(t("chat:resumeTask"))
+							setSecondaryButtonText(t("chat:terminate"))
 							setDidClickCancel(false) // special case where we reset the cancel button state
 							break
 						case "resume_completed_task":
 							setTextAreaDisabled(false)
 							setClineAsk("resume_completed_task")
 							setEnableButtons(true)
-							setPrimaryButtonText("Start New Task")
+							setPrimaryButtonText(t("chat:startNewTask"))
 							setSecondaryButtonText(undefined)
 							setDidClickCancel(false)
 							break
@@ -942,11 +942,11 @@ const ChatView = ({ isHidden, showAnnouncement, hideAnnouncement, showHistoryVie
 	)
 
 	const placeholderText = useMemo(() => {
-		const baseText = task ? "Type a message..." : "Type your task here..."
-		const contextText = "(@ to add context, / to switch modes"
-		const imageText = shouldDisableImages ? ", hold shift to drag in files" : ", hold shift to drag in files/images"
+		const baseText = task ? t("chat:typeMessage") : t("chat:typeTask")
+		const contextText = t("chat:addContext")
+		const imageText = shouldDisableImages ? `, ${t("chat:dragFiles")}` : `, ${t("chat:dragFilesImages")}`
 		return baseText + `\n${contextText}${imageText})`
-	}, [task, shouldDisableImages])
+	}, [task, shouldDisableImages, t])
 
 	const itemContent = useCallback(
 		(index: number, messageOrGroup: ClineMessage | ClineMessage[]) => {
@@ -1107,13 +1107,7 @@ const ChatView = ({ isHidden, showAnnouncement, hideAnnouncement, showHistoryVie
 					{showAnnouncement && <Announcement version={version} hideAnnouncement={hideAnnouncement} />}
 					<div style={{ padding: "0 20px", flexShrink: 0 }}>
 						<h2>{t("chat:greeting")}</h2>
-						<p>
-							Thanks to the latest breakthroughs in agentic coding capabilities, I can handle complex
-							software development tasks step-by-step. With tools that let me create & edit files, explore
-							complex projects, use the browser, and execute terminal commands (after you grant
-							permission), I can assist you in ways that go beyond code completion or tech support. I can
-							even use MCP to create new tools and extend my own capabilities.
-						</p>
+						<p>{t("chat:abourtMe")}</p>
 					</div>
 					{taskHistory.length > 0 && <HistoryPreview showHistoryView={showHistoryView} />}
 				</div>
@@ -1185,7 +1179,7 @@ const ChatView = ({ isHidden, showAnnouncement, hideAnnouncement, showHistoryVie
 									scrollToBottomSmooth()
 									disableAutoScrollRef.current = false
 								}}
-								title="Scroll to bottom of chat">
+								title={t("chat:scrollToBottom")}>
 								<span className="codicon codicon-chevron-down" style={{ fontSize: "18px" }}></span>
 							</ScrollToBottomButton>
 						</div>
@@ -1252,7 +1246,7 @@ const ChatView = ({ isHidden, showAnnouncement, hideAnnouncement, showHistoryVie
 														: undefined
 									}
 									onClick={(e) => handleSecondaryButtonClick(inputValue, selectedImages)}>
-									{isStreaming ? "Cancel" : secondaryButtonText}
+									{isStreaming ? t("chat:cancel") : secondaryButtonText}
 								</VSCodeButton>
 							)}
 						</div>

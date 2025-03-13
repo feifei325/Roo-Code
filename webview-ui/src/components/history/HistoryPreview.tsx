@@ -1,4 +1,5 @@
 import { memo } from "react"
+import { useAppTranslation } from "@/i18n/TranslationContext"
 
 import { vscode } from "@/utils/vscode"
 import { formatLargeNumber, formatDate } from "@/utils/format"
@@ -12,6 +13,7 @@ type HistoryPreviewProps = {
 }
 
 const HistoryPreview = ({ showHistoryView }: HistoryPreviewProps) => {
+	const { t } = useAppTranslation()
 	const { taskHistory } = useExtensionState()
 
 	return (
@@ -19,10 +21,10 @@ const HistoryPreview = ({ showHistoryView }: HistoryPreviewProps) => {
 			<div className="flex items-center justify-between text-vscode-descriptionForeground">
 				<div className="flex items-center gap-1">
 					<span className="codicon codicon-comment-discussion scale-90 mr-1" />
-					<span className="font-medium text-xs uppercase">Recent Tasks</span>
+					<span className="font-medium text-xs uppercase">{t("history:recentTasks")}</span>
 				</div>
 				<Button variant="ghost" size="sm" onClick={() => showHistoryView()} className="uppercase">
-					View All
+					{t("history:viewAll")}
 				</Button>
 			</div>
 			{taskHistory.slice(0, 3).map((item) => (

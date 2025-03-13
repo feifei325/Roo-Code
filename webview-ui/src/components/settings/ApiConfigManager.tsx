@@ -1,5 +1,6 @@
 import { VSCodeButton, VSCodeTextField } from "@vscode/webview-ui-toolkit/react"
 import { memo, useEffect, useRef, useState } from "react"
+import { useAppTranslation } from "@/i18n/TranslationContext"
 import { ApiConfigMeta } from "../../../../src/shared/ExtensionMessage"
 import { Dropdown } from "vscrui"
 import type { DropdownOption } from "vscrui"
@@ -23,6 +24,7 @@ const ApiConfigManager = ({
 	onRenameConfig,
 	onUpsertConfig,
 }: ApiConfigManagerProps) => {
+	const { t } = useAppTranslation()
 	const [isRenaming, setIsRenaming] = useState(false)
 	const [isCreating, setIsCreating] = useState(false)
 	const [inputValue, setInputValue] = useState("")
@@ -144,7 +146,7 @@ const ApiConfigManager = ({
 	return (
 		<div className="flex flex-col gap-1">
 			<label htmlFor="config-profile">
-				<span className="font-medium">Configuration Profile</span>
+				<span className="font-medium">{t("settings:config.configurationProfile")}</span>
 			</label>
 
 			{isRenaming ? (
@@ -160,7 +162,7 @@ const ApiConfigManager = ({
 								setInputValue(target.target.value)
 								setError(null)
 							}}
-							placeholder="Enter new name"
+							placeholder={t("settings:config.enterNewName")}
 							style={{ flexGrow: 1 }}
 							onKeyDown={(e: unknown) => {
 								const event = e as { key: string }
@@ -175,7 +177,7 @@ const ApiConfigManager = ({
 							appearance="icon"
 							disabled={!inputValue.trim()}
 							onClick={handleSave}
-							title="Save"
+							title={t("settings:config.save")}
 							style={{
 								padding: 0,
 								margin: 0,
@@ -188,7 +190,7 @@ const ApiConfigManager = ({
 						<VSCodeButton
 							appearance="icon"
 							onClick={handleCancel}
-							title="Cancel"
+							title={t("settings:config.cancel")}
 							style={{
 								padding: 0,
 								margin: 0,
@@ -224,7 +226,7 @@ const ApiConfigManager = ({
 						<VSCodeButton
 							appearance="icon"
 							onClick={handleAdd}
-							title="Add profile"
+							title={t("settings:config.addProfile")}
 							style={{
 								padding: 0,
 								margin: 0,
@@ -239,7 +241,7 @@ const ApiConfigManager = ({
 								<VSCodeButton
 									appearance="icon"
 									onClick={handleStartRename}
-									title="Rename profile"
+									title={t("settings:config.renameProfile")}
 									style={{
 										padding: 0,
 										margin: 0,
@@ -252,7 +254,11 @@ const ApiConfigManager = ({
 								<VSCodeButton
 									appearance="icon"
 									onClick={handleDelete}
-									title={isOnlyProfile ? "Cannot delete the only profile" : "Delete profile"}
+									title={
+										isOnlyProfile
+											? t("settings:config.cannotDeleteOnlyProfile")
+											: t("settings:config.deleteProfile")
+									}
 									disabled={isOnlyProfile}
 									style={{
 										padding: 0,
@@ -272,7 +278,7 @@ const ApiConfigManager = ({
 							margin: "5px 0 12px",
 							color: "var(--vscode-descriptionForeground)",
 						}}>
-						Save different API configurations to quickly switch between providers and settings.
+						{t("settings:config.saveDifferentApiConfigs")}
 					</p>
 				</>
 			)}
@@ -290,7 +296,7 @@ const ApiConfigManager = ({
 				}}
 				aria-labelledby="new-profile-title">
 				<DialogContent className="p-4 max-w-sm">
-					<DialogTitle>New Configuration Profile</DialogTitle>
+					<DialogTitle>{t("settings:config.newConfigurationProfile")}</DialogTitle>
 					<Input
 						ref={newProfileInputRef}
 						value={newProfileName}
@@ -299,7 +305,7 @@ const ApiConfigManager = ({
 							setNewProfileName(target.target.value)
 							setError(null)
 						}}
-						placeholder="Enter profile name"
+						placeholder={t("settings:config.enterProfileName")}
 						style={{ width: "100%" }}
 						onKeyDown={(e: unknown) => {
 							const event = e as { key: string }
@@ -317,10 +323,10 @@ const ApiConfigManager = ({
 					)}
 					<div className="flex justify-end gap-2 mt-4">
 						<Button variant="secondary" onClick={resetCreateState}>
-							Cancel
+							{t("settings:config.cancel")}
 						</Button>
 						<Button variant="default" disabled={!newProfileName.trim()} onClick={handleNewProfileSave}>
-							Create Profile
+							{t("settings:config.createProfile")}
 						</Button>
 					</div>
 				</DialogContent>

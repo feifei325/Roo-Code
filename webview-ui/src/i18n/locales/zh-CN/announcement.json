@@ -1,0 +1,18 @@
+{
+	"hideAnnouncement": "隐藏公告",
+	"rooCodeReleased": "🎉 Roo Code 3.8 已发布",
+	"rooCodeDescription": "Roo Code 3.8 带来了性能提升、新功能和错误修复。",
+	"whatsNew": "新功能",
+	"fasterCheckpoints": "• 更快的异步检查点",
+	"rooignoreSupport": "• 支持 .rooignore 文件",
+	"fixedIssues": "• 修复了终端和灰屏问题",
+	"multiWindow": "• Roo Code 可以在多个窗口中运行",
+	"multiDiff": "• 实验性的多差异编辑策略",
+	"subtaskCommunication": "• 子任务与父任务的通信",
+	"updatedDeepSeek": "• 更新了 DeepSeek 提供程序",
+	"newHumanRelay": "• 新增 \"Human Relay\" 提供程序",
+	"getMoreDetails": "获取更多详情并参与讨论",
+	"discord": "Discord",
+	"reddit": "Reddit",
+	"rocket": "🚀"
+}

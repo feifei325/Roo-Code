@@ -1,0 +1,153 @@
+{
+	"common": {
+		"settings": "Settings",
+		"save": "Save",
+		"done": "Done"
+	},
+	"config": {
+		"configurationProfile": "Configuration Profile",
+		"enterNewName": "Enter new name",
+		"save": "Save",
+		"cancel": "Cancel",
+		"addProfile": "Add profile",
+		"renameProfile": "Rename profile",
+		"deleteProfile": "Delete profile",
+		"cannotDeleteOnlyProfile": "Cannot delete the only profile",
+		"saveDifferentApiConfigs": "Save different API configurations to quickly switch between providers and settings.",
+		"newConfigurationProfile": "New Configuration Profile",
+		"enterProfileName": "Enter profile name",
+		"createProfile": "Create Profile"
+	},
+	"api": {
+		"common": {
+			"provider": "API Provider",
+			"selectModel": "Select a model...",
+			"model": "model",
+			"apiKey": "API Key",
+			"enterApiKey": "Enter API Key...",
+			"keyStoredLocally": "This key is stored locally and only used to make API requests from this extension.",
+			"useCustomBaseUrl": "Use custom base URL",
+			"baseUrl": "Base URL",
+			"enterBaseUrl": "Enter base URL",
+			"baseUrlOptional": "Base URL (optional)",
+			"modelId": "Model ID",
+			"enableStreaming": "Enable streaming"
+		},
+		"openRouter": {
+			"apiKey": "OpenRouter API Key",
+			"fetchApiKeyLabel": "Get OpenRouter API Key",
+			"defaultBaseUrl": "Default: https://openrouter.ai/api/v1",
+			"compressPrompts": "Compress prompts and message chains to the context size"
+		},
+		"anthropic": {
+			"apiKey": "Anthropic API Key",
+			"fetchApiKeyLabel": "Get Anthropic API Key"
+		},
+		"glama": {
+			"apiKey": "Glama API Key",
+			"fetchApiKeyLabel": "Get Glama API Key"
+		},
+		"requesty": {
+			"apiKey": "Requesty API Key"
+		},
+		"openai": {
+			"native": {
+				"apiKey": "OpenAI API Key",
+				"fetchApiKeyLabel": "Get OpenAI API Key"
+			},
+			"compatible": {
+				"useAzure": "Use Azure",
+				"setAzureApiVersion": "Set Azure API version",
+				"defaultAzureApiVersion": "Default: 2023-05-15",
+				"configureCapabilities": "Configure the capabilities and pricing for your custom OpenAI-compatible model. Be careful when specifying the model capabilities, as they can affect how Roo Code performs.",
+				"maxOutputTokens": "Max Output Tokens",
+				"maxTokensDescription": "Maximum number of tokens the model can generate in a response. (Specify -1 to allow the server to set the max tokens.)",
+				"contextWindowSize": "Context Window Size",
+				"contextWindowDescription": "Total tokens (input + output) the model can process.",
+				"imageSupport": "Image Support",
+				"imageSupportDescription": "Is this model capable of processing and understanding images?",
+				"computerUse": "Computer Use",
+				"computerUseDescription": "Is this model capable of interacting with a browser? (e.g. Claude 3.7 Sonnet).",
+				"promptCaching": "Prompt Caching",
+				"promptCachingDescription": "Is this model capable of caching prompts?",
+				"inputPrice": "Input Price",
+				"outputPrice": "Output Price",
+				"cacheReadsPrice": "Cache Reads Price",
+				"cacheWritesPrice": "Cache Writes Price",
+				"resetToDefaults": "Reset to Defaults"
+			}
+		},
+		"mistral": {
+			"apiKey": "Mistral API Key",
+			"fetchApiKeyLabel": "Get Mistral / Codestral API Key",
+			"codestral": {
+				"baseUrl": "Codestral Base URL (Optional)",
+				"setAlternativeUrl": "Set an alternative URL for the Codestral model."
+			}
+		},
+		"aws": {
+			"credentials": "AWS Credentials",
+			"profile": "AWS Profile",
+			"credentialsDesc": "Authenticate by providing an access key and * or use the default AWS credential providers, i.e. ~/.aws/credentials or environment variables. These credentials are only used locally to make API requests from this extension.",
+			"accessKey": "AWS Access Key",
+			"accessKeyPlaceholder": "Enter Access Key...",
+			"secretKey": "AWS Secret Key",
+			"secretKeyPlaceholder": "Enter Secret Key...",
+			"sessionToken": "AWS Session Token",
+			"sessionTokenPlaceholder": "Enter Session Token...",
+			"region": "AWS Region",
+			"selectRegion": "Select a region...",
+			"useCrossRegionInference": "Use cross-region inference"
+		},
+		"google": {
+			"vertex": {
+				"setup": "To use Google Cloud Vertex AI, you need to:",
+				"createAccount": "1. Create a Google Cloud account, enable the Vertex AI API & enable the desired Claude models.",
+				"installCli": "2. Install the Google Cloud CLI & configure application default credentials.",
+				"createServiceAccount": "3. Or create a service account with credentials.",
+				"credentials": "Google Cloud Credentials",
+				"enterCredentials": "Enter Credentials JSON...",
+				"keyFilePath": "Google Cloud Key File Path",
+				"enterKeyFilePath": "Enter Key File Path...",
+				"projectId": "Google Cloud Project ID",
+				"enterProjectId": "Enter Project ID...",
+				"region": "Google Cloud Region",
+				"instructions": "To use Google Cloud Vertex AI, you need to"
+			},
+			"gemini": {
+				"apiKey": "Gemini API Key",
+				"fetchApiKeyLabel": "Get Gemini API Key"
+			}
+		},
+		"deepseek": {
+			"apiKey": "DeepSeek API Key",
+			"fetchApiKeyLabel": "Get DeepSeek API Key"
+		},
+		"vscode": {
+			"languageModel": "Language Model",
+			"description": "The VS Code Language Model API allows you to run models provided by other VS Code extensions (including but not limited to GitHub Copilot). The easiest way to get started is to install the Copilot and Copilot Chat extensions from the VS Code Marketplace.",
+			"note": "Note: This is a very experimental integration and provider support will vary. If you get an error about a model not being supported, that's an issue on the provider's end."
+		},
+		"lmstudio": {
+			"enableSpeculativeDecoding": "Enable Speculative Decoding",
+			"draftModelId": "Draft Model ID",
+			"draftModelDescription": "Draft model must be from the same model family for speculative decoding to work correctly.",
+			"selectDraftModel": "Select Draft Model",
+			"quickstart": "quickstart guide",
+			"localServer": "local server",
+			"note": "Note: Roo Code uses complex prompts and works best with Claude models. Less capable models may not work as expected.",
+			"description": "LM Studio allows you to run models locally on your computer. For instructions on how to get started, see their quickstart guide. You will also need to start LM Studio's local server feature to use it with this extension."
+		},
+		"ollama": {
+			"description": "Ollama allows you to run models locally on your computer. For instructions on how to get started, see their quickstart guide."
+		},
+		"unbound": {
+			"apiKey": "Unbound API Key",
+			"fetchApiKeyLabel": "Get Unbound API Key"
+		},
+		"humanRelay": {
+			"description": "No API key is required, but the user needs to help copy and paste the information to the web chat AI.",
+			"process": "During use, a dialog box will pop up and the current message will be copied to the clipboard automatically. You need to paste these to web versions of AI (such as ChatGPT or Claude), then copy the AI's reply back to the dialog box and click the confirm button."
+		}
+	}
+}

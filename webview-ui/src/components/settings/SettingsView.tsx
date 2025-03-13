@@ -43,6 +43,7 @@ import { AdvancedSettings } from "./AdvancedSettings"
 import { SettingsFooter } from "./SettingsFooter"
 import { Section } from "./Section"
 import { ExperimentalSettings } from "./ExperimentalSettings"
+import { useAppTranslation } from "@/i18n/TranslationContext"
 
 export interface SettingsViewRef {
 	checkUnsaveChanges: (then: () => void) => void
@@ -64,6 +65,7 @@ const SettingsView = forwardRef<SettingsViewRef, SettingsViewProps>(({ onDone },
 	const confirmDialogHandler = useRef<() => void>()
 
 	const [cachedState, setCachedState] = useState(extensionState)
+	const { t } = useAppTranslation()
 
 	const {
 		alwaysAllowReadOnly,
@@ -279,7 +281,7 @@ const SettingsView = forwardRef<SettingsViewRef, SettingsViewProps>(({ onDone },
 		<Tab>
 			<TabHeader className="flex justify-between items-center gap-2">
 				<div className="flex items-center gap-2">
-					<h3 className="text-vscode-foreground m-0">Settings</h3>
+					<h3 className="text-vscode-foreground m-0">{t("settings:common.settings")}</h3>
 					<div className="hidden [@media(min-width:400px)]:flex items-center">
 						{sections.map(({ id, icon: Icon, ref }) => (
 							<Button
@@ -299,13 +301,13 @@ const SettingsView = forwardRef<SettingsViewRef, SettingsViewProps>(({ onDone },
 						title={!isSettingValid ? errorMessage : isChangeDetected ? "Save changes" : "Nothing changed"}
 						onClick={handleSubmit}
 						disabled={!isChangeDetected || !isSettingValid}>
-						Save
+						{t("settings:common.save")}
 					</VSCodeButton>
 					<VSCodeButton
 						appearance="secondary"
 						title="Discard unsaved changes and close settings panel"
 						onClick={() => checkUnsaveChanges(onDone)}>
-						Done
+						{t("settings:common.done")}
 					</VSCodeButton>
 				</div>
 			</TabHeader>

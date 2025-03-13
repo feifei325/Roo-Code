@@ -1,4 +1,5 @@
 import React, { forwardRef, useCallback, useEffect, useLayoutEffect, useMemo, useRef, useState } from "react"
+import { useAppTranslation } from "@/i18n/TranslationContext"
 import DynamicTextArea from "react-textarea-autosize"
 
 import { mentionRegex, mentionRegexGlobal } from "../../../../src/shared/context-mentions"
@@ -57,6 +58,7 @@ const ChatTextArea = forwardRef<HTMLTextAreaElement, ChatTextAreaProps>(
 		ref,
 	) => {
 		const { filePaths, openedTabs, currentApiConfigName, listApiConfigMeta, customModes, cwd } = useExtensionState()
+		const { t } = useAppTranslation()
 		const [gitCommits, setGitCommits] = useState<any[]>([])
 		const [showDropdown, setShowDropdown] = useState(false)
 
@@ -779,7 +781,7 @@ const ChatTextArea = forwardRef<HTMLTextAreaElement, ChatTextAreaProps>(
 							<SelectDropdown
 								value={mode}
 								disabled={textAreaDisabled}
-								title="Select mode for interaction"
+								title={t("chat:selectMode")}
 								options={[
 									// Add the shortcut text as a disabled option at the top
 									{
@@ -829,7 +831,7 @@ const ChatTextArea = forwardRef<HTMLTextAreaElement, ChatTextAreaProps>(
 							<SelectDropdown
 								value={currentApiConfigName || ""}
 								disabled={textAreaDisabled}
-								title="Select API configuration"
+								title={t("chat:selectApiConfig")}
 								options={[
 									// Add all API configurations
 									...(listApiConfigMeta || []).map((config) => ({
@@ -886,7 +888,7 @@ const ChatTextArea = forwardRef<HTMLTextAreaElement, ChatTextAreaProps>(
 									role="button"
 									aria-label="enhance prompt"
 									data-testid="enhance-prompt-button"
-									title="Enhance prompt with additional context"
+									title={t("chat:enhancePrompt")}
 									className={`input-icon-button ${
 										textAreaDisabled ? "disabled" : ""
 									} codicon codicon-sparkle`}
@@ -899,13 +901,13 @@ const ChatTextArea = forwardRef<HTMLTextAreaElement, ChatTextAreaProps>(
 							className={`input-icon-button ${
 								shouldDisableImages ? "disabled" : ""
 							} codicon codicon-device-camera`}
-							title="Add images to message"
+							title={t("chat:addImages")}
 							onClick={() => !shouldDisableImages && onSelectImages()}
 							style={{ fontSize: 16.5 }}
 						/>
 						<span
 							className={`input-icon-button ${textAreaDisabled ? "disabled" : ""} codicon codicon-send`}
-							title="Send message"
+							title={t("chat:sendMessage")}
 							onClick={() => !textAreaDisabled && onSend()}
 							style={{ fontSize: 15 }}
 						/>

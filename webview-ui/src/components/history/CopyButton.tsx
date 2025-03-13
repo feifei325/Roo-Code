@@ -1,4 +1,5 @@
 import { useCallback } from "react"
+import { useAppTranslation } from "@/i18n/TranslationContext"
 
 import { useClipboard } from "@/components/ui/hooks"
 import { Button } from "@/components/ui"
@@ -9,6 +10,7 @@ type CopyButtonProps = {
 }
 
 export const CopyButton = ({ itemTask }: CopyButtonProps) => {
+	const { t } = useAppTranslation()
 	const { isCopied, copy } = useClipboard()
 
 	const onCopy = useCallback(
@@ -23,7 +25,7 @@ export const CopyButton = ({ itemTask }: CopyButtonProps) => {
 		<Button
 			variant="ghost"
 			size="icon"
-			title="Copy Prompt"
+			title={t("history:copyPrompt")}
 			onClick={onCopy}
 			className="opacity-50 hover:opacity-100">
 			<span className={cn("codicon scale-80", { "codicon-check": isCopied, "codicon-copy": !isCopied })} />

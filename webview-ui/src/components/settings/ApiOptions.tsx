@@ -1,4 +1,5 @@
 import React, { memo, useCallback, useEffect, useMemo, useState } from "react"
+import { useAppTranslation } from "@/i18n/TranslationContext"
 import { useDebounce, useEvent } from "react-use"
 import { Checkbox, Dropdown, type DropdownOption } from "vscrui"
 import { VSCodeLink, VSCodeRadio, VSCodeRadioGroup, VSCodeTextField } from "@vscode/webview-ui-toolkit/react"
@@ -91,6 +92,7 @@ const ApiOptions = ({
 	errorMessage,
 	setErrorMessage,
 }: ApiOptionsProps) => {
+	const { t } = useAppTranslation()
 	const [ollamaModels, setOllamaModels] = useState<string[]>([])
 	const [lmStudioModels, setLmStudioModels] = useState<string[]>([])
 	const [vsCodeLmModels, setVsCodeLmModels] = useState<vscodemodels.LanguageModelChatSelector[]>([])
@@ -259,7 +261,7 @@ const ApiOptions = ({
 		<div className="flex flex-col gap-3">
 			<div className="dropdown-container">
 				<label htmlFor="api-provider" className="font-medium">
-					API Provider
+					{t("settings:api.common.provider")}
 				</label>
 				<Select
 					value={selectedProvider}
@@ -287,16 +289,16 @@ const ApiOptions = ({
 						value={apiConfiguration?.openRouterApiKey || ""}
 						type="password"
 						onInput={handleInputChange("openRouterApiKey")}
-						placeholder="Enter API Key..."
+						placeholder={t("settings:api.common.enterApiKey")}
 						className="w-full">
-						<span className="font-medium">OpenRouter API Key</span>
+						<span className="font-medium">{t("settings:api.openRouter.apiKey")}</span>
 					</VSCodeTextField>
 					<div className="text-sm text-vscode-descriptionForeground -mt-2">
-						This key is stored locally and only used to make API requests from this extension.
+						{t("settings:api.common.keyStoredLocally")}
 					</div>
 					{!apiConfiguration?.openRouterApiKey && (
 						<VSCodeButtonLink href={getOpenRouterAuthUrl(uriScheme)} appearance="secondary">
-							Get OpenRouter API Key
+							{t("settings:api.openRouter.fetchApiKeyLabel")}
 						</VSCodeButtonLink>
 					)}
 					{!fromWelcomeView && (
@@ -311,14 +313,14 @@ const ApiOptions = ({
 											setApiConfigurationField("openRouterBaseUrl", "")
 										}
 									}}>
-									Use custom base URL
+									{t("settings:api.common.useCustomBaseUrl")}
 								</Checkbox>
 								{openRouterBaseUrlSelected && (
 									<VSCodeTextField
 										value={apiConfiguration?.openRouterBaseUrl || ""}
 										type="url"
 										onInput={handleInputChange("openRouterBaseUrl")}
-										placeholder="Default: https://openrouter.ai/api/v1"
+										placeholder={t("settings:api.openRouter.defaultBaseUrl")}
 										className="w-full mt-1"
 									/>
 								)}
@@ -326,7 +328,7 @@ const ApiOptions = ({
 							<Checkbox
 								checked={apiConfiguration?.openRouterUseMiddleOutTransform ?? true}
 								onChange={handleInputChange("openRouterUseMiddleOutTransform", noTransform)}>
-								Compress prompts and message chains to the context size (
+								{t("settings:api.openRouter.compressPrompts")} (
 								<a href="https://openrouter.ai/docs/transforms">OpenRouter Transforms</a>)
 							</Checkbox>
 						</>
@@ -340,16 +342,16 @@ const ApiOptions = ({
 						value={apiConfiguration?.apiKey || ""}
 						type="password"
 						onInput={handleInputChange("apiKey")}
-						placeholder="Enter API Key..."
+						placeholder={t("settings:api.common.enterApiKey")}
 						className="w-full">
-						<div className="font-medium">Anthropic API Key</div>
+						<div className="font-medium">{t("settings:api.anthropic.apiKey")}</div>
 					</VSCodeTextField>
 					<div className="text-sm text-vscode-descriptionForeground -mt-2">
-						This key is stored locally and only used to make API requests from this extension.
+						{t("settings:api.common.keyStoredLocally")}
 					</div>
 					{!apiConfiguration?.apiKey && (
 						<VSCodeButtonLink href="https://console.anthropic.com/settings/keys" appearance="secondary">
-							Get Anthropic API Key
+							{t("settings:api.anthropic.fetchApiKeyLabel")}
 						</VSCodeButtonLink>
 					)}
 					<div>
@@ -362,7 +364,7 @@ const ApiOptions = ({
 									setApiConfigurationField("anthropicBaseUrl", "")
 								}
 							}}>
-							Use custom base URL
+							{t("settings:api.common.useCustomBaseUrl")}
 						</Checkbox>
 						{anthropicBaseUrlSelected && (
 							<VSCodeTextField
@@ -383,16 +385,16 @@ const ApiOptions = ({
 						value={apiConfiguration?.glamaApiKey || ""}
 						type="password"
 						onInput={handleInputChange("glamaApiKey")}
-						placeholder="Enter API Key..."
+						placeholder={t("settings:api.common.enterApiKey")}
 						className="w-full">
-						<span className="font-medium">Glama API Key</span>
+						<span className="font-medium">{t("settings:api.glama.apiKey")}</span>
 					</VSCodeTextField>
 					<div className="text-sm text-vscode-descriptionForeground -mt-2">
-						This key is stored locally and only used to make API requests from this extension.
+						{t("settings:api.common.keyStoredLocally")}
 					</div>
 					{!apiConfiguration?.glamaApiKey && (
 						<VSCodeButtonLink href={getGlamaAuthUrl(uriScheme)} appearance="secondary">
-							Get Glama API Key
+							{t("settings:api.glama.fetchApiKeyLabel")}
 						</VSCodeButtonLink>
 					)}
 				</>
@@ -404,12 +406,12 @@ const ApiOptions = ({
 						value={apiConfiguration?.requestyApiKey || ""}
 						type="password"
 						onInput={handleInputChange("requestyApiKey")}
-						placeholder="Enter API Key..."
+						placeholder={t("settings:api.common.enterApiKey")}
 						className="w-full">
-						<span className="font-medium">Requesty API Key</span>
+						<span className="font-medium">{t("settings:api.requesty.apiKey")}</span>
 					</VSCodeTextField>
 					<div className="text-sm text-vscode-descriptionForeground -mt-2">
-						This key is stored locally and only used to make API requests from this extension.
+						{t("settings:api.common.keyStoredLocally")}
 					</div>
 				</>
 			)}
@@ -420,16 +422,16 @@ const ApiOptions = ({
 						value={apiConfiguration?.openAiNativeApiKey || ""}
 						type="password"
 						onInput={handleInputChange("openAiNativeApiKey")}
-						placeholder="Enter API Key..."
+						placeholder={t("settings:api.common.enterApiKey")}
 						className="w-full">
-						<span className="font-medium">OpenAI API Key</span>
+						<span className="font-medium">{t("settings:api.openai.native.apiKey")}</span>
 					</VSCodeTextField>
 					<div className="text-sm text-vscode-descriptionForeground -mt-2">
-						This key is stored locally and only used to make API requests from this extension.
+						{t("settings:api.common.keyStoredLocally")}
 					</div>
 					{!apiConfiguration?.openAiNativeApiKey && (
 						<VSCodeButtonLink href="https://platform.openai.com/api-keys" appearance="secondary">
-							Get OpenAI API Key
+							{t("settings:api.openai.native.fetchApiKeyLabel")}
 						</VSCodeButtonLink>
 					)}
 				</>
@@ -441,16 +443,16 @@ const ApiOptions = ({
 						value={apiConfiguration?.mistralApiKey || ""}
 						type="password"
 						onInput={handleInputChange("mistralApiKey")}
-						placeholder="Enter API Key..."
+						placeholder={t("settings:api.common.enterApiKey")}
 						className="w-full">
-						<span className="font-medium">Mistral API Key</span>
+						<span className="font-medium">{t("settings:api.mistral.apiKey")}</span>
 					</VSCodeTextField>
 					<div className="text-sm text-vscode-descriptionForeground -mt-2">
-						This key is stored locally and only used to make API requests from this extension.
+						{t("settings:api.common.keyStoredLocally")}
 					</div>
 					{!apiConfiguration?.mistralApiKey && (
 						<VSCodeButtonLink href="https://console.mistral.ai/" appearance="secondary">
-							Get Mistral / Codestral API Key
+							{t("settings:api.mistral.fetchApiKeyLabel")}
 						</VSCodeButtonLink>
 					)}
 					{(apiConfiguration?.apiModelId?.startsWith("codestral-") ||
@@ -462,10 +464,10 @@ const ApiOptions = ({
 								onInput={handleInputChange("mistralCodestralUrl")}
 								placeholder="https://codestral.mistral.ai"
 								className="w-full">
-								<span className="font-medium">Codestral Base URL (Optional)</span>
+								<span className="font-medium">{t("settings:api.mistral.codestral.baseUrl")}</span>
 							</VSCodeTextField>
 							<div className="text-sm text-vscode-descriptionForeground -mt-2">
-								Set an alternative URL for the Codestral model.
+								{t("settings:api.mistral.codestral.setAlternativeUrl")}
 							</div>
 						</>
 					)}
@@ -484,9 +486,7 @@ const ApiOptions = ({
 						<VSCodeRadio value="profile">AWS Profile</VSCodeRadio>
 					</VSCodeRadioGroup>
 					<div className="text-sm text-vscode-descriptionForeground -mt-3">
-						Authenticate by providing an access key and secret or use the default AWS credential providers,
-						i.e. ~/.aws/credentials or environment variables. These credentials are only used locally to
-						make API requests from this extension.
+						{t("settings:api.aws.credentialsDesc")}
 					</div>
 					{apiConfiguration?.awsUseProfile ? (
 						<VSCodeTextField
@@ -494,7 +494,7 @@ const ApiOptions = ({
 							onInput={handleInputChange("awsProfile")}
 							placeholder="Enter profile name"
 							className="w-full">
-							<span className="font-medium">AWS Profile Name</span>
+							<span className="font-medium">{t("settings:api.aws.profile")}</span>
 						</VSCodeTextField>
 					) : (
 						<>
@@ -502,31 +502,31 @@ const ApiOptions = ({
 								value={apiConfiguration?.awsAccessKey || ""}
 								type="password"
 								onInput={handleInputChange("awsAccessKey")}
-								placeholder="Enter Access Key..."
+								placeholder={t("settings:api.aws.accessKeyPlaceholder")}
 								className="w-full">
-								<span className="font-medium">AWS Access Key</span>
+								<span className="font-medium">{t("settings:api.aws.accessKey")}</span>
 							</VSCodeTextField>
 							<VSCodeTextField
 								value={apiConfiguration?.awsSecretKey || ""}
 								type="password"
 								onInput={handleInputChange("awsSecretKey")}
-								placeholder="Enter Secret Key..."
+								placeholder={t("settings:api.aws.secretKeyPlaceholder")}
 								className="w-full">
-								<span className="font-medium">AWS Secret Key</span>
+								<span className="font-medium">{t("settings:api.aws.secretKey")}</span>
 							</VSCodeTextField>
 							<VSCodeTextField
 								value={apiConfiguration?.awsSessionToken || ""}
 								type="password"
 								onInput={handleInputChange("awsSessionToken")}
-								placeholder="Enter Session Token..."
+								placeholder={t("settings:api.aws.sessionTokenPlaceholder")}
 								className="w-full">
-								<span className="font-medium">AWS Session Token</span>
+								<span className="font-medium">{t("settings:api.aws.sessionToken")}</span>
 							</VSCodeTextField>
 						</>
 					)}
 					<div className="dropdown-container">
 						<label htmlFor="aws-region-dropdown" className="font-medium">
-							AWS Region
+							{t("settings:api.aws.region")}
 						</label>
 						<Dropdown
 							id="aws-region-dropdown"
@@ -556,7 +556,7 @@ const ApiOptions = ({
 					<Checkbox
 						checked={apiConfiguration?.awsUseCrossRegionInference || false}
 						onChange={handleInputChange("awsUseCrossRegionInference", noTransform)}>
-						Use cross-region inference
+						{t("settings:api.aws.useCrossRegionInference")}
 					</Checkbox>
 				</>
 			)}
@@ -564,54 +564,53 @@ const ApiOptions = ({
 			{selectedProvider === "vertex" && (
 				<>
 					<div className="text-sm text-vscode-descriptionForeground">
-						<div>To use Google Cloud Vertex AI, you need to:</div>
+						<div>{t("settings:api.google.vertex.instructions")}</div>
 						<div>
 							<VSCodeLink
 								href="https://cloud.google.com/vertex-ai/generative-ai/docs/partner-models/use-claude#before_you_begin"
 								className="text-sm">
-								1. Create a Google Cloud account, enable the Vertex AI API & enable the desired Claude
-								models.
+								{t("settings:api.google.vertex.createAccount")}
 							</VSCodeLink>
 						</div>
 						<div>
 							<VSCodeLink
 								href="https://cloud.google.com/docs/authentication/provide-credentials-adc#google-idp"
 								className="text-sm">
-								2. Install the Google Cloud CLI & configure application default credentials.
+								{t("settings:api.google.vertex.installCli")}
 							</VSCodeLink>
 						</div>
 						<div>
 							<VSCodeLink
 								href="https://developers.google.com/workspace/guides/create-credentials?hl=en#service-account"
 								className="text-sm">
-								3. Or create a service account with credentials.
+								{t("settings:api.google.vertex.createServiceAccount")}
 							</VSCodeLink>
 						</div>
 					</div>
 					<VSCodeTextField
 						value={apiConfiguration?.vertexJsonCredentials || ""}
 						onInput={handleInputChange("vertexJsonCredentials")}
-						placeholder="Enter Credentials JSON..."
+						placeholder={t("settings:api.google.vertex.enterCredentials")}
 						className="w-full">
-						<span className="font-medium">Google Cloud Credentials</span>
+						<span className="font-medium">{t("settings:api.google.vertex.credentials")}</span>
 					</VSCodeTextField>
 					<VSCodeTextField
 						value={apiConfiguration?.vertexKeyFile || ""}
 						onInput={handleInputChange("vertexKeyFile")}
-						placeholder="Enter Key File Path..."
+						placeholder={t("settings:api.google.vertex.enterKeyFilePath")}
 						className="w-full">
-						<span className="font-medium">Google Cloud Key File Path</span>
+						<span className="font-medium">{t("settings:api.google.vertex.keyFilePath")}</span>
 					</VSCodeTextField>
 					<VSCodeTextField
 						value={apiConfiguration?.vertexProjectId || ""}
 						onInput={handleInputChange("vertexProjectId")}
-						placeholder="Enter Project ID..."
+						placeholder={t("settings:api.google.vertex.enterProjectId")}
 						className="w-full">
-						<span className="font-medium">Google Cloud Project ID</span>
+						<span className="font-medium">{t("settings:api.google.vertex.projectId")}</span>
 					</VSCodeTextField>
 					<div className="dropdown-container">
 						<label htmlFor="vertex-region-dropdown" className="font-medium">
-							Google Cloud Region
+							{t("settings:api.google.vertex.region")}
 						</label>
 						<Dropdown
 							id="vertex-region-dropdown"
@@ -637,16 +636,16 @@ const ApiOptions = ({
 						value={apiConfiguration?.geminiApiKey || ""}
 						type="password"
 						onInput={handleInputChange("geminiApiKey")}
-						placeholder="Enter API Key..."
+						placeholder={t("settings:api.common.enterApiKey")}
 						className="w-full">
-						<span className="font-medium">Gemini API Key</span>
+						<span className="font-medium">{t("settings:api.google.gemini.apiKey")}</span>
 					</VSCodeTextField>
 					<div className="text-sm text-vscode-descriptionForeground -mt-2">
-						This key is stored locally and only used to make API requests from this extension.
+						{t("settings:api.common.keyStoredLocally")}
 					</div>
 					{!apiConfiguration?.geminiApiKey && (
 						<VSCodeButtonLink href="https://ai.google.dev/" appearance="secondary">
-							Get Gemini API Key
+							{t("settings:api.google.gemini.fetchApiKeyLabel")}
 						</VSCodeButtonLink>
 					)}
 					<div>
@@ -659,7 +658,7 @@ const ApiOptions = ({
 									setApiConfigurationField("googleGeminiBaseUrl", "")
 								}
 							}}>
-							Use custom base URL
+							{t("settings:api.common.useCustomBaseUrl")}
 						</Checkbox>
 						{googleGeminiBaseUrlSelected && (
 							<VSCodeTextField
@@ -680,17 +679,17 @@ const ApiOptions = ({
 						value={apiConfiguration?.openAiBaseUrl || ""}
 						type="url"
 						onInput={handleInputChange("openAiBaseUrl")}
-						placeholder={"Enter base URL..."}
+						placeholder={t("settings:api.common.enterBaseUrl")}
 						className="w-full">
-						<span className="font-medium">Base URL</span>
+						<span className="font-medium">{t("settings:api.common.baseUrl")}</span>
 					</VSCodeTextField>
 					<VSCodeTextField
 						value={apiConfiguration?.openAiApiKey || ""}
 						type="password"
 						onInput={handleInputChange("openAiApiKey")}
-						placeholder="Enter API Key..."
+						placeholder={t("settings:api.common.enterApiKey")}
 						className="w-full">
-						<span className="font-medium">API Key</span>
+						<span className="font-medium">{t("settings:api.common.apiKey")}</span>
 					</VSCodeTextField>
 					<ModelPicker
 						apiConfiguration={apiConfiguration}
@@ -706,12 +705,12 @@ const ApiOptions = ({
 					<Checkbox
 						checked={apiConfiguration?.openAiStreamingEnabled ?? true}
 						onChange={handleInputChange("openAiStreamingEnabled", noTransform)}>
-						Enable streaming
+						{t("settings:api.common.enableStreaming")}
 					</Checkbox>
 					<Checkbox
 						checked={apiConfiguration?.openAiUseAzure ?? false}
 						onChange={handleInputChange("openAiUseAzure", noTransform)}>
-						Use Azure
+						{t("settings:api.openai.compatible.useAzure")}
 					</Checkbox>
 					<div>
 						<Checkbox
@@ -723,7 +722,7 @@ const ApiOptions = ({
 									setApiConfigurationField("azureApiVersion", "")
 								}
 							}}>
-							Set Azure API version
+							{t("settings:api.openai.compatible.setAzureApiVersion")}
 						</Checkbox>
 						{azureApiVersionSelected && (
 							<VSCodeTextField
@@ -737,8 +736,7 @@ const ApiOptions = ({
 
 					<div className="flex flex-col gap-3">
 						<div className="text-sm text-vscode-descriptionForeground">
-							Configure the capabilities and pricing for your custom OpenAI-compatible model. Be careful
-							when specifying the model capabilities, as they can affect how Roo Code performs.
+							{t("settings:api.openai.compatible.configureCapabilities")}
 						</div>
 
 						<div>
@@ -773,11 +771,12 @@ const ApiOptions = ({
 								})}
 								placeholder="e.g. 4096"
 								className="w-full">
-								<span className="font-medium">Max Output Tokens</span>
+								<span className="font-medium">
+									{t("settings:api.openai.compatible.maxOutputTokens")}
+								</span>
 							</VSCodeTextField>
 							<div className="text-sm text-vscode-descriptionForeground">
-								Maximum number of tokens the model can generate in a response. (Specify -1 to allow the
-								server to set the max tokens.)
+								{t("settings:api.openai.compatible.maxTokensDescription")}
 							</div>
 						</div>
 
@@ -816,10 +815,12 @@ const ApiOptions = ({
 								})}
 								placeholder="e.g. 128000"
 								className="w-full">
-								<span className="font-medium">Context Window Size</span>
+								<span className="font-medium">
+									{t("settings:api.openai.compatible.contextWindowSize")}
+								</span>
 							</VSCodeTextField>
 							<div className="text-sm text-vscode-descriptionForeground">
-								Total tokens (input + output) the model can process.
+								{t("settings:api.openai.compatible.contextWindowDescription")}
 							</div>
 						</div>
 
@@ -836,7 +837,9 @@ const ApiOptions = ({
 											supportsImages: checked,
 										}
 									})}>
-									<span className="font-medium">Image Support</span>
+									<span className="font-medium">
+										{t("settings:api.openai.compatible.imageSupport")}
+									</span>
 								</Checkbox>
 								<i
 									className="codicon codicon-info text-vscode-descriptionForeground"
@@ -845,7 +848,7 @@ const ApiOptions = ({
 								/>
 							</div>
 							<div className="text-sm text-vscode-descriptionForeground pt-1">
-								Is this model capable of processing and understanding images?
+								{t("settings:api.openai.compatible.imageSupportDescription")}
 							</div>
 						</div>
 
@@ -859,7 +862,9 @@ const ApiOptions = ({
 											supportsComputerUse: checked,
 										}
 									})}>
-									<span className="font-medium">Computer Use</span>
+									<span className="font-medium">
+										{t("settings:api.openai.compatible.computerUse")}
+									</span>
 								</Checkbox>
 								<i
 									className="codicon codicon-info text-vscode-descriptionForeground"
@@ -868,7 +873,7 @@ const ApiOptions = ({
 								/>
 							</div>
 							<div className="text-sm text-vscode-descriptionForeground pt-1">
-								Is this model capable of interacting with a browser? (e.g. Claude 3.7 Sonnet).
+								{t("settings:api.openai.compatible.computerUseDescription")}
 							</div>
 						</div>
 
@@ -882,7 +887,9 @@ const ApiOptions = ({
 											supportsPromptCache: checked,
 										}
 									})}>
-									<span className="font-medium">Prompt Caching</span>
+									<span className="font-medium">
+										{t("settings:api.openai.compatible.promptCaching")}
+									</span>
 								</Checkbox>
 								<i
 									className="codicon codicon-info text-vscode-descriptionForeground"
@@ -891,7 +898,7 @@ const ApiOptions = ({
 								/>
 							</div>
 							<div className="text-sm text-vscode-descriptionForeground pt-1">
-								Is this model capable of caching prompts?
+								{t("settings:api.openai.compatible.promptCachingDescription")}
 							</div>
 						</div>
 
@@ -928,7 +935,9 @@ const ApiOptions = ({
 								placeholder="e.g. 0.0001"
 								className="w-full">
 								<div className="flex items-center gap-1">
-									<span className="font-medium">Input Price</span>
+									<span className="font-medium">
+										{t("settings:api.openai.compatible.inputPrice")}
+									</span>
 									<i
 										className="codicon codicon-info text-vscode-descriptionForeground"
 										title="Cost per million tokens in the input/prompt. This affects the cost of sending context and instructions to the model."
@@ -971,7 +980,9 @@ const ApiOptions = ({
 								placeholder="e.g. 0.0002"
 								className="w-full">
 								<div className="flex items-center gap-1">
-									<span className="font-medium">Output Price</span>
+									<span className="font-medium">
+										{t("settings:api.openai.compatible.outputPrice")}
+									</span>
 									<i
 										className="codicon codicon-info text-vscode-descriptionForeground"
 										title="Cost per million tokens in the model's response. This affects the cost of generated content and completions."
@@ -1015,7 +1026,7 @@ const ApiOptions = ({
 										placeholder="e.g. 0.0001"
 										className="w-full">
 										<div className="flex items-center gap-1">
-											<span className="font-medium">Cache Reads Price</span>
+											<span className="font-medium">{t("settings:api.cacheReadsPrice")}</span>
 											<i
 												className="codicon codicon-info text-vscode-descriptionForeground"
 												title="Cost per million tokens for reading from the cache. This is the price charged when a cached response is retrieved."
@@ -1056,7 +1067,7 @@ const ApiOptions = ({
 										placeholder="e.g. 0.00005"
 										className="w-full">
 										<div className="flex items-center gap-1">
-											<span className="font-medium">Cache Writes Price</span>
+											<span className="font-medium">{t("settings:api.cacheWritesPrice")}</span>
 											<i
 												className="codicon codicon-info text-vscode-descriptionForeground"
 												title="Cost per million tokens for writing to the cache. This is the price charged when a prompt is cached for the first time."
@@ -1073,7 +1084,7 @@ const ApiOptions = ({
 							onClick={() =>
 								setApiConfigurationField("openAiCustomModelInfo", openAiModelInfoSaneDefaults)
 							}>
-							Reset to Defaults
+							{t("settings:api.openai.compatible.resetToDefaults")}
 						</Button>
 					</div>
 				</>
@@ -1087,14 +1098,14 @@ const ApiOptions = ({
 						onInput={handleInputChange("lmStudioBaseUrl")}
 						placeholder={"Default: http://localhost:1234"}
 						className="w-full">
-						<span className="font-medium">Base URL (optional)</span>
+						<span className="font-medium">{t("settings:api.common.baseUrlOptional")}</span>
 					</VSCodeTextField>
 					<VSCodeTextField
 						value={apiConfiguration?.lmStudioModelId || ""}
 						onInput={handleInputChange("lmStudioModelId")}
 						placeholder={"e.g. meta-llama-3.1-8b-instruct"}
 						className="w-full">
-						<span className="font-medium">Model ID</span>
+						<span className="font-medium">{t("settings:api.common.modelId")}</span>
 					</VSCodeTextField>
 					{lmStudioModels.length > 0 && (
 						<VSCodeRadioGroup
@@ -1120,7 +1131,7 @@ const ApiOptions = ({
 							// Explicitly set the boolean value using direct method.
 							setApiConfigurationField("lmStudioSpeculativeDecodingEnabled", checked)
 						}}>
-						Enable Speculative Decoding
+						{t("settings:api.lmstudio.enableSpeculativeDecoding")}
 					</Checkbox>
 					{apiConfiguration?.lmStudioSpeculativeDecodingEnabled && (
 						<>
@@ -1130,16 +1141,15 @@ const ApiOptions = ({
 									onInput={handleInputChange("lmStudioDraftModelId")}
 									placeholder={"e.g. lmstudio-community/llama-3.2-1b-instruct"}
 									className="w-full">
-									<span className="font-medium">Draft Model ID</span>
+									<span className="font-medium">{t("settings:api.lmstudio.draftModelId")}</span>
 								</VSCodeTextField>
 								<div className="text-sm text-vscode-descriptionForeground">
-									Draft model must be from the same model family for speculative decoding to work
-									correctly.
+									{t("settings:api.lmstudio.draftModelDescription")}
 								</div>
 							</div>
 							{lmStudioModels.length > 0 && (
 								<>
-									<div className="font-medium">Select Draft Model</div>
+									<div className="font-medium">{t("settings:api.selectDraftModel")}</div>
 									<VSCodeRadioGroup
 										value={
 											lmStudioModels.includes(apiConfiguration?.lmStudioDraftModelId || "")
@@ -1161,14 +1171,14 @@ const ApiOptions = ({
 												border: "1px solid var(--vscode-inputValidation-infoBorder)",
 												color: "var(--vscode-inputValidation-infoForeground)",
 											}}>
-											No draft models found. Please ensure LM Studio is running with Server Mode
-											enabled.
+											{t("settings:api.noDraftModels")}
 										</div>
 									)}
 								</>
 							)}
 						</>
 					)}
+
 					<div className="text-sm text-vscode-descriptionForeground">
 						LM Studio allows you to run models locally on your computer. For instructions on how to get
 						started, see their <VSCodeLink href="https://lmstudio.ai/docs">quickstart guide</VSCodeLink>.
@@ -1189,16 +1199,16 @@ const ApiOptions = ({
 						value={apiConfiguration?.deepSeekApiKey || ""}
 						type="password"
 						onInput={handleInputChange("deepSeekApiKey")}
-						placeholder="Enter API Key..."
+						placeholder={t("settings:api.common.enterApiKey")}
 						className="w-full">
-						<span className="font-medium">DeepSeek API Key</span>
+						<span className="font-medium">{t("settings:api.deepseek.apiKey")}</span>
 					</VSCodeTextField>
 					<div className="text-sm text-vscode-descriptionForeground -mt-2">
-						This key is stored locally and only used to make API requests from this extension.
+						{t("settings:api.common.keyStoredLocally")}
 					</div>
 					{!apiConfiguration?.deepSeekApiKey && (
 						<VSCodeButtonLink href="https://platform.deepseek.com/" appearance="secondary">
-							Get DeepSeek API Key
+							{t("settings:api.deepseek.fetchApiKeyLabel")}
 						</VSCodeButtonLink>
 					)}
 				</>
@@ -1208,7 +1218,7 @@ const ApiOptions = ({
 				<>
 					<div className="dropdown-container">
 						<label htmlFor="vscode-lm-model" className="font-medium">
-							Language Model
+							{t("settings:api.vscode.languageModel")}
 						</label>
 						{vsCodeLmModels.length > 0 ? (
 							<Select
@@ -1222,7 +1232,7 @@ const ApiOptions = ({
 									return { vendor, family }
 								})}>
 								<SelectTrigger className="w-full">
-									<SelectValue placeholder="Select a model..." />
+									<SelectValue placeholder={t("settings:api.common.selectModel")} />
 								</SelectTrigger>
 								<SelectContent>
 									<SelectGroup>
@@ -1238,16 +1248,11 @@ const ApiOptions = ({
 							</Select>
 						) : (
 							<div className="text-sm text-vscode-descriptionForeground">
-								The VS Code Language Model API allows you to run models provided by other VS Code
-								extensions (including but not limited to GitHub Copilot). The easiest way to get started
-								is to install the Copilot and Copilot Chat extensions from the VS Code Marketplace.
+								{t("settings:api.vscode.description")}
 							</div>
 						)}
 					</div>
-					<div className="text-sm text-vscode-errorForeground">
-						Note: This is a very experimental integration and provider support will vary. If you get an
-						error about a model not being supported, that's an issue on the provider's end.
-					</div>
+					<div className="text-sm text-vscode-errorForeground">{t("settings:api.vscode.note")}</div>
 				</>
 			)}
 
@@ -1259,14 +1264,14 @@ const ApiOptions = ({
 						onInput={handleInputChange("ollamaBaseUrl")}
 						placeholder={"Default: http://localhost:11434"}
 						className="w-full">
-						<span className="font-medium">Base URL (optional)</span>
+						<span className="font-medium">{t("settings:api.common.baseUrlOptional")}</span>
 					</VSCodeTextField>
 					<VSCodeTextField
 						value={apiConfiguration?.ollamaModelId || ""}
 						onInput={handleInputChange("ollamaModelId")}
 						placeholder={"e.g. llama3.1"}
 						className="w-full">
-						<span className="font-medium">Model ID</span>
+						<span className="font-medium">{t("settings:api.common.modelId")}</span>
 					</VSCodeTextField>
 					{ollamaModels.length > 0 && (
 						<VSCodeRadioGroup
@@ -1287,16 +1292,7 @@ const ApiOptions = ({
 						</VSCodeRadioGroup>
 					)}
 					<div className="text-sm text-vscode-descriptionForeground">
-						Ollama allows you to run models locally on your computer. For instructions on how to get
-						started, see their
-						<VSCodeLink href="https://github.com/ollama/ollama/blob/main/README.md">
-							quickstart guide
-						</VSCodeLink>
-						.
-						<span className="text-vscode-errorForeground ml-1">
-							<span className="font-medium">Note:</span> Roo Code uses complex prompts and works best with
-							Claude models. Less capable models may not work as expected.
-						</span>
+						{t("settings:api.ollama.description")}
 					</div>
 				</>
 			)}
@@ -1307,16 +1303,16 @@ const ApiOptions = ({
 						value={apiConfiguration?.unboundApiKey || ""}
 						type="password"
 						onInput={handleInputChange("unboundApiKey")}
-						placeholder="Enter API Key..."
+						placeholder={t("settings:api.common.enterApiKey")}
 						className="w-full">
-						<span className="font-medium">Unbound API Key</span>
+						<span className="font-medium">{t("settings:api.unbound.apiKey")}</span>
 					</VSCodeTextField>
 					<div className="text-sm text-vscode-descriptionForeground -mt-2">
-						This key is stored locally and only used to make API requests from this extension.
+						{t("settings:api.common.keyStoredLocally")}
 					</div>
 					{!apiConfiguration?.unboundApiKey && (
 						<VSCodeButtonLink href="https://gateway.getunbound.ai" appearance="secondary">
-							Get Unbound API Key
+							{t("settings:api.unbound.fetchApiKeyLabel")}
 						</VSCodeButtonLink>
 					)}
 				</>
@@ -1325,13 +1321,10 @@ const ApiOptions = ({
 			{selectedProvider === "human-relay" && (
 				<>
 					<div className="text-sm text-vscode-descriptionForeground">
-						No API key is required, but the user needs to help copy and paste the information to the web
-						chat AI.
+						{t("settings:api.humanRelay.description")}
 					</div>
 					<div className="text-sm text-vscode-descriptionForeground">
-						During use, a dialog box will pop up and the current message will be copied to the clipboard
-						automatically. You need to paste these to web versions of AI (such as ChatGPT or Claude), then
-						copy the AI's reply back to the dialog box and click the confirm button.
+						{t("settings:api.humanRelay.process")}
 					</div>
 				</>
 			)}
@@ -1398,7 +1391,7 @@ const ApiOptions = ({
 				<>
 					<div className="dropdown-container">
 						<label htmlFor="model-id" className="font-medium">
-							Model
+							{t("settings:api.common.model")}
 						</label>
 						<Dropdown
 							id="model-id"
@@ -1435,7 +1428,7 @@ const ApiOptions = ({
 								<span className="font-medium">Custom ARN</span>
 							</VSCodeTextField>
 							<div className="text-sm text-vscode-descriptionForeground -mt-2">
-								Enter a valid AWS Bedrock ARN for the model you want to use. Format examples:
+								{t("settings:api.awsBedrockArnDesc")}
 								<ul className="list-disc pl-5 mt-1">
 									<li>
 										arn:aws:bedrock:us-east-1:123456789012:foundation-model/anthropic.claude-3-sonnet-20240229-v1:0
@@ -1447,7 +1440,7 @@ const ApiOptions = ({
 										arn:aws:bedrock:us-east-1:123456789012:default-prompt-router/anthropic.claude:1
 									</li>
 								</ul>
-								Make sure the region in the ARN matches your selected AWS Region above.
+								{t("settings:api.awsBedrockArnRegionNote")}
 							</div>
 							{apiConfiguration?.awsCustomArn &&
 								(() => {
@@ -1459,8 +1452,7 @@ const ApiOptions = ({
 									if (!validation.isValid) {
 										return (
 											<div className="text-sm text-vscode-errorForeground mt-2">
-												{validation.errorMessage ||
-													"Invalid ARN format. Please check the examples above."}
+												{validation.errorMessage || t("settings:api.invalidArnFormat")}
 											</div>
 										)
 									}

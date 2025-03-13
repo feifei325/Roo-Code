@@ -1,0 +1,153 @@
+{
+	"common": {
+		"settings": "设置",
+		"save": "保存",
+		"done": "完成"
+	},
+	"config": {
+		"configurationProfile": "配置文件",
+		"enterNewName": "输入新名称",
+		"save": "保存",
+		"cancel": "取消",
+		"addProfile": "添加配置文件",
+		"renameProfile": "重命名配置文件",
+		"deleteProfile": "删除配置文件",
+		"cannotDeleteOnlyProfile": "无法删除唯一的配置文件",
+		"saveDifferentApiConfigs": "保存不同的配置文件以快速切换提供商和设置。",
+		"newConfigurationProfile": "新建配置文件",
+		"enterProfileName": "输入配置文件名称",
+		"createProfile": "创建配置文件"
+	},
+	"api": {
+		"common": {
+			"provider": "大模型 API 提供商",
+			"selectModel": "选择一个模型...",
+			"model": "大模型",
+			"apiKey": "API 密钥",
+			"enterApiKey": "输入 API 密钥...",
+			"keyStoredLocally": "此密钥存储在本地，仅用于从此扩展程序发出 API 请求。",
+			"useCustomBaseUrl": "使用自定义基础 URL",
+			"baseUrl": "基础 URL",
+			"enterBaseUrl": "输入基础 URL",
+			"baseUrlOptional": "基础 URL（可选）",
+			"modelId": "大模型 ID",
+			"enableStreaming": "启用流式传输"
+		},
+		"openRouter": {
+			"apiKey": "OpenRouter API 密钥",
+			"fetchApiKeyLabel": "获取 OpenRouter API 密钥",
+			"defaultBaseUrl": "默认值：https://openrouter.ai/api/v1",
+			"compressPrompts": "压缩提示和消息链以适应上下文大小"
+		},
+		"anthropic": {
+			"apiKey": "Anthropic API 密钥",
+			"fetchApiKeyLabel": "获取 Anthropic API 密钥"
+		},
+		"glama": {
+			"apiKey": "Glama API 密钥",
+			"fetchApiKeyLabel": "获取 Glama API 密钥"
+		},
+		"requesty": {
+			"apiKey": "Requesty API 密钥"
+		},
+		"openai": {
+			"native": {
+				"apiKey": "OpenAI API 密钥",
+				"fetchApiKeyLabel": "获取 OpenAI API 密钥"
+			},
+			"compatible": {
+				"useAzure": "使用 Azure",
+				"setAzureApiVersion": "设置 Azure API 版本",
+				"defaultAzureApiVersion": "默认值：2023-05-15",
+				"configureCapabilities": "配置自定义 OpenAI 兼容模型的功能和定价。在指定模型功能时要小心，因为它们可能会影响 Roo Code 的性能。",
+				"maxOutputTokens": "最大输出令牌数",
+				"maxTokensDescription": "模型在响应中可以生成的最大令牌数。（指定 -1 以允许服务器设置最大令牌数。）",
+				"contextWindowSize": "上下文窗口大小",
+				"contextWindowDescription": "模型可以处理的总令牌数（输入 + 输出）。",
+				"imageSupport": "图像支持",
+				"imageSupportDescription": "此模型是否能够处理和理解图像？",
+				"computerUse": "计算机使用",
+				"computerUseDescription": "此模型是否能够与浏览器交互？（例如 Claude 3.7 Sonnet）。",
+				"promptCaching": "提示缓存",
+				"promptCachingDescription": "此模型是否能够缓存提示？",
+				"inputPrice": "输入价格",
+				"outputPrice": "输出价格",
+				"cacheReadsPrice": "缓存读取价格",
+				"cacheWritesPrice": "缓存写入价格",
+				"resetToDefaults": "重置为默认值"
+			}
+		},
+		"mistral": {
+			"apiKey": "Mistral API 密钥",
+			"fetchApiKeyLabel": "获取 Mistral / Codestral API 密钥",
+			"codestral": {
+				"baseUrl": "Codestral 基础 URL（可选）",
+				"setAlternativeUrl": "为 Codestral 模型设置替代 URL。"
+			}
+		},
+		"aws": {
+			"credentials": "AWS 凭证",
+			"profile": "AWS 配置文件",
+			"credentialsDesc": "通过提供访问密钥和密钥进行身份验证，或使用默认的 AWS 凭证提供程序，即 ~/.aws/credentials 或环境变量。这些凭证仅在本地用于从此扩展程序发出 API 请求。",
+			"accessKey": "AWS 访问密钥",
+			"accessKeyPlaceholder": "输入 AWS Access Key...",
+			"secretKey": "AWS 密钥",
+			"secretKeyPlaceholder": "输入 AWS Secret Key...",
+			"sessionToken": "AWS 会话令牌",
+			"sessionTokenPlaceholder": "输入 AWS Session Token...",
+			"region": "AWS 区域",
+			"selectRegion": "选择一个区域...",
+			"useCrossRegionInference": "使用跨区域推理"
+		},
+		"google": {
+			"vertex": {
+				"setup": "要使用 Google Cloud Vertex AI，您需要：",
+				"createAccount": "1. 创建一个 Google Cloud 账户，启用 Vertex AI API 并启用所需的 Claude 模型。",
+				"installCli": "2. 安装 Google Cloud CLI 并配置应用程序默认凭证。",
+				"createServiceAccount": "3. 或者创建一个带有凭证的服务账户。",
+				"credentials": "Google Cloud 凭证",
+				"enterCredentials": "输入凭证 JSON...",
+				"keyFilePath": "Google Cloud 密钥文件路径",
+				"enterKeyFilePath": "输入密钥文件路径...",
+				"projectId": "Google Cloud 项目 ID",
+				"enterProjectId": "输入项目 ID...",
+				"region": "Google Cloud 区域",
+				"instructions": "要使用 Google Cloud Vertex AI，您需要"
+			},
+			"gemini": {
+				"apiKey": "Gemini API 密钥",
+				"fetchApiKeyLabel": "获取 Gemini API 密钥"
+			}
+		},
+		"deepseek": {
+			"apiKey": "DeepSeek API 密钥",
+			"fetchApiKeyLabel": "获取 DeepSeek API 密钥"
+		},
+		"vscode": {
+			"languageModel": "语言模型",
+			"description": "VS Code 语言模型 API 允许您运行由其他 VS Code 扩展程序（包括但不限于 GitHub Copilot）提供的模型。入门的最简单方法是安装 Copilot 和 Copilot Chat 扩展程序。",
+			"note": "注意：这是一个非常实验性的集成，提供商支持会有所不同。如果您收到有关模型不受支持的错误，那是提供商方面的问题。"
+		},
+		"lmstudio": {
+			"enableSpeculativeDecoding": "启用推测解码",
+			"draftModelId": "草稿模型 ID",
+			"draftModelDescription": "草稿模型必须来自同一模型家族，才能使推测解码正常工作。",
+			"selectDraftModel": "选择草稿模型",
+			"quickstart": "快速入门指南",
+			"localServer": "本地服务器",
+			"note": "注意：Roo Code 使用复杂的提示，最适合 Claude 模型。功能较弱的模型可能无法正常工作。",
+			"description": "LM Studio 允许您在本地计算机上运行模型。有关如何入门的说明，请参阅其快速入门指南。您还需要启动 LM Studio 的本地服务器功能才能在此扩展程序中使用它。"
+		},
+		"ollama": {
+			"description": "Ollama 允许您在本地计算机上运行模型。有关如何入门的说明，请参阅其快速入门指南。"
+		},
+		"unbound": {
+			"apiKey": "Unbound API 密钥",
+			"fetchApiKeyLabel": "获取 Unbound API 密钥"
+		},
+		"humanRelay": {
+			"description": "不需要 API 密钥，但用户需要帮助将信息复制并粘贴到网页聊天 AI 中。",
+			"process": "在使用过程中，会弹出一个对话框，当前消息会自动复制到剪贴板。您需要将这些内容粘贴到网页版的 AI（如 ChatGPT 或 Claude）中，然后将 AI 的回复复制回对话框并点击确认按钮。"
+		}
+	}
+}

@@ -15,3 +15,15 @@
 # Adding a New Setting
 
 To add a new setting that persists its state, follow the steps in cline_docs/settings.md
+
+# i18n Translation Rules
+   - 使用i18n 进行当前文件菜单汉化
+   - 英文保持原文，不要修改英文的原文。
+   - 英文的菜单内容保存到 @/webview-ui/src/i18n/locales/en/chat.json 
+   - 中文菜单内容保存到 @/webview-ui/src/i18n/locales/zh-CN/chat.json
+   - 使用下列方式引入 i18n
+   ```
+   import { useAppTranslation } from "@/i18n/TranslationContext"
+	const { t } = useAppTranslation()
+   并且使用 {t("chat:greeting")} 类似的方式
+   ```

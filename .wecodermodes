@@ -1,0 +1,14 @@
+{
+  "customModes": [
+    {
+      "slug": "i18n-translation",
+      "name": "i18n Translation",
+      "roleDefinition": "负责处理 i18n 翻译相关任务",
+      "groups": [
+        "read",
+        ["edit", { "fileRegex": ".*i18n.*\\.json$", "description": "仅限 i18n 相关 JSON 文件" }]
+      ],
+      "customInstructions": "i18n 翻译规则：\n- 使用i18n 进行当前文件菜单汉化\n- 英文保持原文，不要修改英文的原文。\n- 英文的菜单内容保存到 @/webview-ui/src/i18n/locales/en/chat.json\n- 中文菜单内容保存到 @/webview-ui/src/i18n/locales/zh-CN/chat.json\n- 使用下列方式引入 i18n\n```\nimport { useAppTranslation } from \"@/i18n/TranslationContext\"\nconst { t } = useAppTranslation()\n并且使用 {t(\"chat:greeting\")} 类似的方式\n```"
+    }
+  ]
+}
