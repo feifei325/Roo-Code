@@ -37,6 +37,7 @@ export interface ExtensionStateContextType extends ExtensionState {
 	cloudIsAuthenticated: boolean
 	sharingEnabled: boolean
 	maxConcurrentFileReads?: number
+	mdmCompliant?: boolean
 	condensingApiConfigId?: string
 	setCondensingApiConfigId: (value: string) => void
 	customCondensingPrompt?: string
@@ -163,7 +164,7 @@ export const ExtensionStateContextProvider: React.FC<{ children: React.ReactNode
 		terminalOutputLineLimit: 500,
 		terminalShellIntegrationTimeout: 4000,
 		mcpEnabled: true,
-		enableMcpServerCreation: true,
+		enableMcpServerCreation: false,
 		alwaysApproveResubmit: false,
 		requestDelaySeconds: 5,
 		currentApiConfigName: "default",
