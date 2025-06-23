@@ -55,7 +55,7 @@ Check out the [CHANGELOG](CHANGELOG.md) for detailed updates and fixes.
 
 Roo Code 3.21 brings major new features and improvements based on your feedback!
 
-- **Roo Marketplace Launch** - The marketplace is now live! The marketplace is now live! Discover and install modes and MCPs easier than ever before.
+- **Roo Marketplace Launch** - The marketplace is now live! Discover and install modes and MCPs easier than ever before.
 - **Gemini 2.5 Models** - Added support for new Gemini 2.5 Pro, Flash, and Flash Lite models.
 - **Excel File Support & More** - Added Excel (.xlsx) file support and numerous bug fixes and improvements!
 
@@ -156,7 +156,7 @@ A `.vsix` file will appear in the `bin/` directory which can be installed with:
 code --install-extension bin/roo-cline-<version>.vsix
 ```
 
-We use [changesets](https://github.com/changesets/changesets) for versioning and publishing. Check our `CHANGELOG.md` for release notes.
+We use [changesets](https://github.com/changesets/changesets) for versioning and publishing. Check our [CHANGELOG.md](CHANGELOG.md) for release notes.
 
 ---
 
@@ -221,4 +221,4 @@ Thanks to all our contributors who have helped make Roo Code better!
 
 ---
 
-**Enjoy Roo Code!** Whether you keep it on a short leash or let it roam autonomously, we can’t wait to see what you build. If you have questions or feature ideas, drop by our [Reddit community](https://www.reddit.com/r/RooCode/) or [Discord](https://discord.gg/roocode). Happy coding!
+**Enjoy Roo Code!** Whether you prefer guided assistance or full autonomy, we're excited to see what you'll create with it. Have questions or feature ideas? Join our friendly [Reddit community](https://www.reddit.com/r/RooCode/) or [Discord server](https://discord.gg/roocode) to connect with other users and our team. Happy coding!
